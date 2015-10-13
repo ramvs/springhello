@@ -23,6 +23,10 @@ public class ProductServiceImpl implements ProductService {
     public List<Product> getProductsByCategory(String category){
         return productRespository.getProductsByCategory(category);}
 
+    public Product getProductById(String productID) {
+        return productRespository.getProductById(productID);
+    }
+
     public Set<Product> getProductsByFilter(Map<String, List<String>> filterParams) {
         return productRespository.getProductsByFilter(filterParams);
     }
