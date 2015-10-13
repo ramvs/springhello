@@ -2,6 +2,7 @@ package com.springapp.mvc.controller;
 
 import com.springapp.mvc.domain.Product;
 import com.springapp.mvc.repository.ProductRepository;
+import com.springapp.mvc.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,7 +16,7 @@ import java.math.BigDecimal;
 @Controller
 public class ProductController{
     @Autowired
-    private ProductRepository productRepository;
+    private ProductService productService;
 
     @RequestMapping("/products")
     public String list(Model model) {
@@ -25,7 +26,7 @@ public class ProductController{
 //        iphone.setCategory("Smart Phone");
 //        iphone.setManufacturer("Apple");
 //        iphone.setUnitsInStock(1000);
-        model.addAttribute("products", productRepository.getAllProducts());
+        model.addAttribute("products", productService.getAllProducts());
         return "products";
     }
 }
