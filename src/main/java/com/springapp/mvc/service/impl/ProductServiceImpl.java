@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by Krystian on 2015-10-13.
@@ -17,5 +19,11 @@ public class ProductServiceImpl implements ProductService {
     private ProductRepository productRespository;
     public List<Product> getAllProducts() {
         return productRespository.getAllProducts();
+    }
+    public List<Product> getProductsByCategory(String category){
+        return productRespository.getProductsByCategory(category);}
+
+    public Set<Product> getProductsByFilter(Map<String, List<String>> filterParams) {
+        return productRespository.getProductsByFilter(filterParams);
     }
 }
