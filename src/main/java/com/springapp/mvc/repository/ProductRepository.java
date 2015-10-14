@@ -17,4 +17,6 @@ public interface ProductRepository {
     List<Product> getProductsByPriceFilter(BigDecimal low, BigDecimal high);
     Product getProductById(String productID);
     Set<Product> getProductsByFilter(Map<String, List<String>> filterParams);
+
+    void addProduct(Product product);
 }
