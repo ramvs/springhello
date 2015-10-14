@@ -47,7 +47,11 @@ public class ProductController{
         model.addAttribute("products",productService.getProductsByCategory(productCategory));
         return "products";
     }
-
+    @RequestMapping("/price")
+    public String getProductsByPrice(@RequestParam("low") BigDecimal low, @RequestParam("high") BigDecimal high, Model model){
+        model.addAttribute("products", productService.getProductsByPriceFilter(low, high));
+        return "products";
+    }
     @RequestMapping("/filter/{ByCriteria}")
     public String getProductsByFilter(@MatrixVariable(pathVar=
             "ByCriteria") Map<String,List<String>> filterParams,Model model) {

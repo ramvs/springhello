@@ -6,6 +6,7 @@ import com.springapp.mvc.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -22,6 +23,14 @@ public class ProductServiceImpl implements ProductService {
     }
     public List<Product> getProductsByCategory(String category){
         return productRespository.getProductsByCategory(category);}
+
+    public List<Product> getProductsByManufacturer(String manufacturer) {
+        return productRespository.getProductsByManufacturer(manufacturer);
+    }
+
+    public List<Product> getProductsByPriceFilter(BigDecimal low, BigDecimal high) {
+        return productRespository.getProductsByPriceFilter(low, high);
+    }
 
     public Product getProductById(String productID) {
         return productRespository.getProductById(productID);

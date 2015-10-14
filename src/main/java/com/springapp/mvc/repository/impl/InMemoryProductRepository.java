@@ -51,6 +51,25 @@ public class InMemoryProductRepository implements ProductRepository {
         return productsByCategory;
     }
 
+    public List<Product> getProductsByManufacturer(String manufacturer) {
+        List<Product> productsByManufacturer = new ArrayList<Product>();
+        for (Product product : listOfProducts) {
+            if (manufacturer.equalsIgnoreCase(product.getManufacturer())) {
+                productsByManufacturer.add(product);
+            }
+        }
+        return productsByManufacturer;
+    }
+
+    public List<Product> getProductsByPriceFilter(BigDecimal low, BigDecimal high) {
+        List<Product> productsByPriceFilter = new ArrayList<Product>();
+        for (Product product : listOfProducts) {
+            if ((product.getUnitPrice().compareTo(low) >= 0) && (product.getUnitPrice().compareTo(high) <= 0))
+                productsByPriceFilter.add(product);
+        }
+        return productsByPriceFilter;
+    }
+
     public Product getProductById(String productId) {
         Product productById = null;
 
@@ -72,6 +91,7 @@ public class InMemoryProductRepository implements ProductRepository {
         Set<Product> productsByBrand = new HashSet<Product>();
         Set<Product> productsByCategory = new HashSet<Product>();
         Set<String> criterias = filterParams.keySet();
+
         if (criterias.contains("brand")) {
             for (String brandName : filterParams.get("brand")) {
                 for (Product product : listOfProducts) {
@@ -86,6 +106,8 @@ public class InMemoryProductRepository implements ProductRepository {
                 productsByCategory.addAll(this.getProductsByCategory(category));
             }
         }
+
+
         productsByCategory.retainAll(productsByBrand);
         return productsByCategory;
     }
