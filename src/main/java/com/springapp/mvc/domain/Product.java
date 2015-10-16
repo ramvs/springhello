@@ -1,5 +1,7 @@
 package com.springapp.mvc.domain;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import java.math.BigDecimal;
 import java.util.Objects;
 
@@ -16,6 +18,8 @@ public class Product {
     private long unitsInStock;
     private long unitsInOrder;
     private String conditions;
+    private MultipartFile productImage;
+    private MultipartFile productPDF;
 
     public Product(){
         super();
@@ -126,5 +130,21 @@ public class Product {
                 "productId='" + productId + '\'' +
                 ", name='" + name + '\'' +
                 '}';
+    }
+
+    public MultipartFile getProductImage() {
+        return productImage;
+    }
+
+    public void setProductImage(MultipartFile productImage) {
+        this.productImage = productImage;
+    }
+
+    public MultipartFile getProductPDF() {
+        return productPDF;
+    }
+
+    public void setProductPDF(MultipartFile productPDF) {
+        this.productPDF = productPDF;
     }
 }
