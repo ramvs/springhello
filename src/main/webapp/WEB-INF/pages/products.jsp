@@ -55,6 +55,12 @@
                                     <span class="glyphicon-info-sign glyphicon"/></span> Details
                                 </a>
                             </p>
+                            <p>
+                                <a href=" <spring:url value= "/resource/pdf/${product.productId}.pdf" /> "
+                                   class="btn btn-primary">
+                                    <span class="glyphicon-info-sign glyphicon"/></span> PDF file
+                                </a>
+                            </p>
                         </div>
                     </div>
                 </div>
