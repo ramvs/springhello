@@ -1,7 +1,11 @@
 package com.springapp.mvc.domain;
 
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import java.math.BigDecimal;
 import java.util.Objects;
 
@@ -18,7 +22,9 @@ public class Product {
     private long unitsInStock;
     private long unitsInOrder;
     private String conditions;
+    @JsonIgnore
     private MultipartFile productImage;
+    @JsonIgnore
     private MultipartFile productPDF;
 
     public Product(){
@@ -143,7 +149,7 @@ public class Product {
     public MultipartFile getProductPDF() {
         return productPDF;
     }
-
+    @XmlTransient
     public void setProductPDF(MultipartFile productPDF) {
         this.productPDF = productPDF;
     }
