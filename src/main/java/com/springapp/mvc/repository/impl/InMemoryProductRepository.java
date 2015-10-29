@@ -1,6 +1,7 @@
 package com.springapp.mvc.repository.impl;
 
 import com.springapp.mvc.domain.Product;
+import com.springapp.mvc.exception.ProductNotFoundException;
 import com.springapp.mvc.repository.ProductRepository;
 import org.springframework.stereotype.Repository;
 
@@ -81,7 +82,7 @@ public class InMemoryProductRepository implements ProductRepository {
             }
         }
         if (productById == null) {
-            throw new IllegalArgumentException("No product found with the product" +
+            throw new ProductNotFoundException("No product found with the product" +
                     "id" + productId);
         }
         return productById;

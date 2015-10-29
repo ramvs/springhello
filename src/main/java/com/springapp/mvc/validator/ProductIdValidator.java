@@ -7,6 +7,7 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 import com.springapp.mvc.domain.Product;
+import com.springapp.mvc.exception.ProductNotFoundException;
 import com.springapp.mvc.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 
