@@ -1,6 +1,7 @@
 package com.springapp.mvc.controller;
 
 import com.springapp.mvc.domain.Product;
+import com.springapp.mvc.exception.ProductNotFoundException;
 import com.springapp.mvc.repository.ProductRepository;
 import com.springapp.mvc.service.ProductService;
 import com.sun.org.apache.xpath.internal.operations.Mod;
@@ -12,6 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -118,8 +120,19 @@ public class ProductController {
     @InitBinder
     public void initialiseBinder(WebDataBinder binder) {
         binder.setDisallowedFields("unitsInOrder");
-        binder.setAllowedFields("productId","name","unitPrice","description","manufacturer",
-                "category","unitsInStock", "productImage","productPDF");
+        binder.setAllowedFields("productId", "name", "unitPrice", "description", "manufacturer",
+                "category", "unitsInStock", "productImage", "productPDF");
+    }
+
+    @ExceptionHandler(ProductNotFoundException.class)
+    public ModelAndView handleError(HttpServletRequest
+                                            req,ProductNotFoundException exception) {
+        ModelAndView mav = new ModelAndView();
+        mav.addObject("invalidProductId", exception.getProductId());
+        mav.addObject("exception", exception);
+        mav.addObject("url", req.getRequestURL() + "?" + req.getQueryString());
+        mav.setViewName("productNotFound");
+        return mav;
     }
 
 }
