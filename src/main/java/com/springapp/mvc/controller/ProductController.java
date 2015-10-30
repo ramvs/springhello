@@ -103,14 +103,7 @@ public class ProductController {
             }
         }
 
-        MultipartFile productPDF = newProduct.getProductPDF();
-        if (productPDF!=null && !productPDF.isEmpty()) {
-            try {
-                productPDF.transferTo(new File(rootDirectory+"resources\\pdf\\"+ newProduct.getProductId() + ".pdf"));
-            } catch (Exception e) {
-                throw new RuntimeException("Product PDF saving failed",e);
-            }
-        }
+
         productService.addProduct(newProduct);
         return "redirect:/products";
     }
