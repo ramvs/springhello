@@ -1,48 +1,50 @@
 package com.springapp.mvc.domain;
 
+import java.math.BigDecimal;
+
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlTransient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.springapp.mvc.validator.ProductId;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.validation.constraints.*;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
-import java.math.BigDecimal;
-import java.util.Objects;
+import com.springapp.mvc.validator.ProductId;
 
-/**
- * Created by Krystian on 2015-10-12.
- */
 public class Product {
-    @Pattern(regexp="P[0-9]+", message="{Pattern.Product.productId.validation}")
+
+    @Pattern(regexp="P[1-9]+", message="{Pattern.Product.productId.validation}")
     @ProductId
     private String productId;
-    @Size(min=4, max=50, message= "{Size.Product.name.validation}")
+
+    @Size(min=4, max=50, message="{Size.Product.name.validation}")
     private String name;
-    @Min(value=0, message="{Min.Product.unitPrice.validation}")
+
+    @Min(value=0, message="Min.Product.unitPrice.validation}")
     @Digits(integer=8, fraction=2, message="{Digits.Product.unitPrice.validation}")
-    @NotNull(message="{NotNull.Product.unitPrice.validation}")
+    @NotNull(message= "{NotNull.Product.unitPrice.validation}")
     private BigDecimal unitPrice;
     private String description;
     private String manufacturer;
     private String category;
     private long unitsInStock;
     private long unitsInOrder;
-    private String conditions;
+    private boolean discontinued;
+    private String condition;
     @JsonIgnore
-    private MultipartFile productImage;
-    @JsonIgnore
-    private MultipartFile productPDF;
+    private MultipartFile  productImage;
 
-    public Product(){
+    public Product() {
         super();
     }
 
-    public Product(String productId, String name, BigDecimal unitPrice){
-        this.setProductId(productId);
-        this.setName(name);
-        this.setUnitPrice(unitPrice);
+    public Product(String productId, String name, BigDecimal unitPrice) {
+        this.productId = productId;
+        this.name = name;
+        this.unitPrice = unitPrice;
     }
 
     public String getProductId() {
@@ -71,6 +73,15 @@ public class Product {
 
     public String getDescription() {
         return description;
+    }
+
+    @XmlTransient
+    public MultipartFile getProductImage() {
+        return productImage;
+    }
+
+    public void setProductImage(MultipartFile productImage) {
+        this.productImage = productImage;
     }
 
     public void setDescription(String description) {
@@ -109,28 +120,32 @@ public class Product {
         this.unitsInOrder = unitsInOrder;
     }
 
-    public String getConditions() {
-        return conditions;
+    public boolean isDiscontinued() {
+        return discontinued;
     }
 
-    public void setConditions(String conditions) {
-        this.conditions = conditions;
+    public void setDiscontinued(boolean discontinued) {
+        this.discontinued = discontinued;
+    }
+
+    public String getCondition() {
+        return condition;
+    }
+
+    public void setCondition(String condition) {
+        this.condition = condition;
     }
 
     @Override
-    public int hashCode() {
-        return productId.hashCode();
-    }
-    @Override
-    public boolean equals(Object obj){
+    public boolean equals(Object obj) {
         if (this == obj)
             return true;
-        if (this ==null)
+        if (obj == null)
             return false;
         if (getClass() != obj.getClass())
             return false;
         Product other = (Product) obj;
-        if (productId == null){
+        if (productId == null) {
             if (other.productId != null)
                 return false;
         } else if (!productId.equals(other.productId))
@@ -139,26 +154,16 @@ public class Product {
     }
 
     @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result
+                + ((productId == null) ? 0 : productId.hashCode());
+        return result;
+    }
+
+    @Override
     public String toString() {
-        return "Product{" +
-                "productId='" + productId + '\'' +
-                ", name='" + name + '\'' +
-                '}';
-    }
-
-    public MultipartFile getProductImage() {
-        return productImage;
-    }
-
-    public void setProductImage(MultipartFile productImage) {
-        this.productImage = productImage;
-    }
-
-    public MultipartFile getProductPDF() {
-        return productPDF;
-    }
-    @XmlTransient
-    public void setProductPDF(MultipartFile productPDF) {
-        this.productPDF = productPDF;
+        return "Product [productId=" + productId + ", name=" + name + "]";
     }
 }
