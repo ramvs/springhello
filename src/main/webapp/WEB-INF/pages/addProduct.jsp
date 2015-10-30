@@ -62,7 +62,7 @@ btn-mini pull-right">logout</a>
         </div>
         <div class="form-group">
             <label class="control-label col-lg-2 col-lg-2"
-                   for="unitsInStock">Units in Stock</label>
+                   for="unitsInStock">Unit Price</label>
 
             <div class="col-lg-10">
                 <form:input id="unitsPrice" path="unitPrice" type="text"
