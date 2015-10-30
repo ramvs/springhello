@@ -2,9 +2,7 @@ package com.springapp.mvc.controller;
 
 import com.springapp.mvc.domain.Product;
 import com.springapp.mvc.exception.ProductNotFoundException;
-import com.springapp.mvc.repository.ProductRepository;
 import com.springapp.mvc.service.ProductService;
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,7 +28,6 @@ import java.util.Map;
 public class ProductController {
     @Autowired
     private ProductService productService;
-
     @RequestMapping
     public String list(Model model) {
 //        Product iphone = new Product("P1234","iPhone 5s", new BigDecimal(500));
@@ -94,6 +91,7 @@ public class ProductController {
             throw new RuntimeException("Attempting to bind disallowed fields: "
                     + StringUtils.arrayToCommaDelimitedString(suppressedFields));
         }
+        ////Adding image
         MultipartFile productImage = newProduct.getProductImage();
         String rootDirectory
                 =request.getSession().getServletContext().getRealPath("/");
